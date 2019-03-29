@@ -1,9 +1,9 @@
-import cron from "cron";
+import { CronJob } from "cron";
 import {
     execute
 } from "../services/produce-kafka-message";
 
-var scheduler = new cron.CronJob({
+var scheduler = new CronJob({
     cronTime: "*/5 * * * * *",
     onTick: execute,
     start: true,

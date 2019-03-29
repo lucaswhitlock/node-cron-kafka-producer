@@ -1,7 +1,11 @@
-import kafka from "kafka-node";
+import {
+    KafkaClient,
+    Producer,
+    KeyedMessage
+} from "kafka-node";
 
-const client = new kafka.KafkaClient(process.env.KAFKA_CLIENT);
-const producer = new kafka.Producer(client);
+const client = new KafkaClient(process.env.KAFKA_CLIENT);
+const producer = new Producer(client);
 
 var isProducerReady = false;
 
@@ -20,7 +24,7 @@ const execute = async () => {
         console.log("Generating payload...");
         let payload = [{
             topic: process.env.KAFKA_TOPIC,
-            messages: new kafka.KeyedMessage("1", "Teste"),
+            messages: new KeyedMessage("1", "Teste"),
             partition: 0
         }];
         console.log(`Payload generated successfully: ${JSON.stringify(payload)}`);
